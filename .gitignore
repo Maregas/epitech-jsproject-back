@@ -62,3 +62,6 @@ typings/
 
 # history from vscpde
 .history/
+
+# IDEA files
+.idea/*
