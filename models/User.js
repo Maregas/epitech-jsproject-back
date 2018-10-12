@@ -21,11 +21,19 @@ const mUser = db.define('User', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  isActive: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
+  }
 
 });
 
 mUser.sync({
- // force: true
-})
+//  force: true
+});
 
 module.exports = mUser;

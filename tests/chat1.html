@@ -1,0 +1,24 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CHAT 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <h1>CHAT 1</h1>
+    <div id="body">
+
+    </div>
+    <script type="text/javascript">
+        let ws = new WebSocket('ws://localhost:3000/chatroom/general');
+        ws.onmessage = function (msg) {
+            document.getElementById('body').innerHTML = `<p>${msg.data}</p>`;
+        }
+    </script>
+</body>
+
+</html>
