@@ -1,19 +1,15 @@
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
-const { createLogger, format, transports } = require("winston");
-const mUser = require("./models/User");
+const mUser = require('./models/User');
+const logger = require('./controllers/logger');
 const mRank = require("./models/Rank");
 const mUserRank = require("./models/UserRank");
-const logger = createLogger({
-  level: "debug",
-  format: format.simple(),
-  transports: [new transports.Console()]
-});
 
 const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
+require('express-ws')(app);
 
 app.use(morgan("dev"));
 
@@ -30,7 +26,7 @@ app.get("/test", async (req, res) => {
 
   await mUser.create({
     nickname: "Nitratz",
-    email: "liege30@gmail.com",
+app.use(require('./routes/websockets'));
     password: "1234test"
   });
 
