@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('../controlers/sequelize').dbcongfig;
+const db = require('../controllers/sequelize').dbcongfig;
 
 const mUser = db.define('User', {
   id: {

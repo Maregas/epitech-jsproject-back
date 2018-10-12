@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('../controlers/sequelize').dbcongfig;
+const db = require('../controllers/sequelize').dbcongfig;
 
 const mGame = db.define('Game', {
   id: {
