@@ -39,8 +39,6 @@ mRank.hasOne(mUserRank, {
     onDelete: 'CASCADE'
 });
 
-mUserRank.sync({
-//    force: true
-})
+mUserRank.sync();
 
 module.exports = mUserRank;

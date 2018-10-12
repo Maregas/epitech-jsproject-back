@@ -22,8 +22,6 @@ const mGame = db.define('Game', {
   },
 });
 
-mGame.sync({
-  // force: true
-})
+mGame.sync();
 
 module.exports = mGame;

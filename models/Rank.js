@@ -27,8 +27,6 @@ mRank.belongsTo(mGame, {
 });
 
 
-mRank.sync({
-    force: true
-})
+mRank.sync();
 
 module.exports = mRank;
