@@ -9,7 +9,9 @@ const wsClients = expressWs.getWss('/chatroom/general');
 router.ws('/chatroom/general', (ws, req) => {
     ws.on('message', (msg) => {
         logger.info(msg);
+        logger.info(JSON.stringify(wsClients));
         wsClients.clients.forEach((client) => {
+            logger.info(client);
 			client.send(msg);
 		});
     });
