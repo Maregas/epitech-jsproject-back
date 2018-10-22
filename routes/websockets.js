@@ -1,37 +1,12 @@
-const express = require('express');
-let router = express.Router();
-const logger = require('../controllers/logger');
-let expressWs = require('express-ws');
-expressWs = expressWs(express());
-const chatrooms = {};
+const express = require("express");
+const logger = require("../controllers/logger");
+const chatrooms = {0: "test", 1: "lol"};
+const server = require('../controllers/server').server;
+const io = require('socket.io').listen(server);
 
-const wsClients = expressWs.getWss('/chatroom/general');
-router.ws('/chatroom/general', (ws, req) => {
-    ws.on('message', (msg) => {
-        logger.info(msg);
-        logger.info(JSON.stringify(wsClients));
-        wsClients.clients.forEach((client) => {
-            logger.info(client);
-			client.send(msg);
-		});
-    });
-    logger.info('socket', req.testing);
+io.on("connection", function(socket) {
+  logger.info("a user connected");
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
 });
-
-router.ws('/chatroom:name', (ws, req) => {
-    const name = req.params.name;
-    const room = chatrooms[name] || {
-      connections: []
-    };
-    room.connections.push(ws);
-    chatrooms[name] = room;
-  
-    ws.on('message', (msg) => {
-      room.connections.forEach((conn) => {
-        if (conn === ws) return;
-        conn.send(msg);
-      });
-    });
-});
-
-module.exports = router;
