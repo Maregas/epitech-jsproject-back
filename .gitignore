@@ -65,3 +65,9 @@ typings/
 
 # IDEA files
 .idea/*
+
+# .env
+.env
+
+# db
+db/

@@ -16,6 +16,7 @@
     <script type="text/javascript">
         let ws = new WebSocket('ws://localhost:3000/chatroom/general');
         ws.onmessage = function (msg) {
+            console.log(msg);
             document.getElementById('body').innerHTML = `<p>${msg.data}</p>`;
         }
     </script>
