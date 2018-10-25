@@ -22,12 +22,11 @@ router.post('/api/signup', async (req, res) => {
     }
 });
 
-
 router.post('/api/login', async (req, res) => {
-    const body = req.body
-    const u = new User(body.email, body.password)
+    const body = req.body;
+    const u = new User(body.email, body.password);
     try {
-        const user = await u.auth(process.env.SUPER_SECRET.superSecret);
+        const user = await u.auth(process.env.SUPER_SECRET);
         if (user.auth) {
             res.json(user);
         } else {

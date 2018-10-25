@@ -8,7 +8,7 @@ class User {
             this.email = email;
             this.password = password;
             if (arguments.length === 3) {
-                this.nickname = nickname
+                this.nickname = nickname;
                 this.hash = "";
             }
         }
@@ -80,14 +80,15 @@ class User {
             where: {
                 email: this.email
             }
-        })
+        });
         if (account) {
             account = {
                 id: account.dataValues.id,
                 email: account.dataValues.email,
                 nickname: account.dataValues.nickname,
                 password: account.dataValues.password
-            }
+            };
+            await this.setStatus(account.id, true);
             res = await this.genToken(account, secret);
         } else {
             res = {
@@ -97,6 +98,16 @@ class User {
             };
         }
         return res;
+    }
+
+    async setStatus(userId, active) {
+      const payload = { isActive: active };
+      await mUser.update(payload, {
+        where: {
+          id: userId
+        }
+      });
+      return { edited: true };
     }
 
     async edit(body, userId) {

@@ -27,13 +27,10 @@ const mUser = db.define('User', {
   },
   isActive: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true
+    defaultValue: false
   }
-
 });
 
-mUser.sync({
-//  force: true
-});
+mUser.sync();
 
 module.exports = mUser;
