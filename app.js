@@ -6,8 +6,17 @@ const ws = require("./routes/websockets");
 const bodyParser = require("body-parser");
 const jwt = require('jsonwebtoken');
 const mUser = require('./models/modelLoader').mUser;
+const cors = require('cors');
 
 app.use(morgan("dev"));
+
+app.use(cors({
+  'allowedHeaders': ['sessionId', 'Content-Type', 'Authorization'],
+  'exposedHeaders': ['sessionId'],
+  'origin': '*',
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

@@ -26,7 +26,7 @@ class User {
                 email: account.email,
                 nickname: account.nickname,
                 token: token,
-                token_type: "Bearer"
+                tokenType: "Bearer"
             };
         } else {
             return {
@@ -170,6 +170,16 @@ class User {
         return {
             deleted: true
         }
+    }
+
+    async find(userId) {
+      const user = await mUser.find({
+        where: {
+          id: userId
+        }
+      });
+
+      return user;
     }
 }
 module.exports = User;
