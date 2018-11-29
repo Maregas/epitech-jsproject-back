@@ -1,8 +1,8 @@
 require("dotenv").config();
 const app = require("./controllers/server").app;
 const morgan = require("morgan");
-const logger = require("./controllers/logger");
-const ws = require("./routes/websockets");
+// const logger = require("./controllers/logger");
+// const ws = require("./routes/websockets");
 const bodyParser = require("body-parser");
 const jwt = require('jsonwebtoken');
 const mUser = require('./models/modelLoader').mUser;
@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
   })
 );
 
-app.use(require("./routes/free/api"));
+app.use(require("./routes/open/api"));
 
 app.use(async (req, res, next) => {
   const result = {
