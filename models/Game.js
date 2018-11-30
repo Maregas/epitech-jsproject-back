@@ -16,7 +16,7 @@ const mGame = db.define('Game', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  background_image_URI: {
+  background_image_url: {
     type: Sequelize.STRING,
     allowNull: true
   },
