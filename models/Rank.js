@@ -13,13 +13,28 @@ const mRank = db.define('Rank', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    icon_URI: {
+    icon_url: {
         type: Sequelize.STRING,
+        allowNull: true
+    },
+    position: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    subrank: {
+        type: Sequelize.INTEGER,
         allowNull: true
     }
 });
 
 mRank.belongsTo(mGame, {
+    foreignKey: {
+        allowNull: false
+    },
+    onDelete: 'CASCADE'
+});
+
+mGame.hasMany(mRank, {
     foreignKey: {
         allowNull: false
     },

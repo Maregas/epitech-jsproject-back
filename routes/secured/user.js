@@ -17,7 +17,7 @@ router.post("/api/account", async (req, res) => {
   const user = new User();
   try {
     const edit = await user.edit(req.body, userId);
-    if (edit.edited) {
+    if (edit.success) {
       res.json({
         success: true
       });
@@ -33,32 +33,50 @@ router.delete("/api/account", async (req, res) => {
   const userId = req.userId;
   const user = new User();
 
-  await user.delete(userId);
-  res.json({
-    success: true
-  });
+  try {
+    await user.delete(userId);
+    res.json({
+      success: true
+    });      
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      error: error
+    });
+  }
 });
 
 router.get("/api/account/me", async (req, res) => {
   const userId = req.userId;
-  const user = new User();
+  const userCtrl = new User();
+  const user = await userCtrl.findById(userId);
 
-  const dbUser = await user.find(userId);
-
-  if (dbUser && dbUser.id === userId) {
+  if (user && user.id === userId) {
     res.status(200).json({
-      valid: true,
+      success: true,
       user: {
-        id: dbUser.id,
-        email: dbUser.email,
-        nickname: dbUser.nickname
+        id: user.id,
+        email: user.email,
+        nickname: user.nickname
       }
     });
   } else {
-    res.status(200).json({
-      valid: false
+    res.status(400).json({
+      success: false
     });
   }
+});
+
+router.post("/api/user/addRank", async (req, res) => {
+    const userId = req.userId;
+    const userCtrl = new User();
+
+    try {
+      await userCtrl.addRank(userId, req.body.gameId, req.body.rankId);
+      res.json({success: true});      
+    } catch (error) {
+      res.status(400).json(error);
+    }
 });
 
 module.exports = router;

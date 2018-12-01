@@ -58,7 +58,8 @@ app.use(async (req, res, next) => {
             });
           }
         } catch (error) {
-          result.message = "Failed to authenticate token.";
+          result.error = "TOKENEXPIRED";
+          result.msg = "Failed to authenticate token.";
           res.status(401).json(result);
         }
       } else {

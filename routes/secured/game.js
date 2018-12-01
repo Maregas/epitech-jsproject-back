@@ -6,7 +6,7 @@ router.post("/api/game/create", async (req, res) => {
     const gameCtrl = new Game();
     try {
         const game = await gameCtrl.create(req.body);
-        if (game.created) {
+        if (game.success) {
             res.json({
                 success: true
             });
@@ -26,6 +26,23 @@ router.get("/api/game/list", async (req, res) => {
     } catch (error) {
         res.status(400).json(error);
     }
+});
+
+router.post("/api/game/rank/create", async (req, res) => {
+    const gameCtrl = new Game();
+    try {
+        const ranks = await gameCtrl.createRanks(req.body);
+        if (ranks.success) {
+            res.json({
+                success: true
+            });
+        } else {
+            res.status(400).json(ranks);
+        }
+    } catch (err) {
+        res.status(400).json(err);
+    }
+
 });
 
 module.exports = router;

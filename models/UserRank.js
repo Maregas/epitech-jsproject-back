@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../controllers/sequelize').dbcongfig;
 const mUser = require('./User');
 const mRank = require('./Rank');
+const mGame = require('./Game');
 
 
 const mUserRank = db.define('UserRank', {
@@ -11,6 +12,19 @@ const mUserRank = db.define('UserRank', {
         type: Sequelize.INTEGER
     },
 });
+
+mUserRank.belongsTo(mGame, {
+    foreignKey: {
+        allowNull: false
+    },
+    onDelete: 'CASCADE'
+});
+mGame.hasMany(mUserRank, {
+    foreignKey: {
+        allowNull: false
+    },
+    onDelete: 'CASCADE'
+})
 
 mUserRank.belongsTo(mUser, {
     foreignKey: {
