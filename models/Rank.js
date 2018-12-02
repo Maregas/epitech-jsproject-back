@@ -9,7 +9,6 @@ const mRank = db.define('Rank', {
         type: Sequelize.INTEGER
     },
     name: {
-        unique: true,
         type: Sequelize.STRING,
         allowNull: false
     },
@@ -20,10 +19,6 @@ const mRank = db.define('Rank', {
     position: {
         type: Sequelize.INTEGER,
         allowNull: false
-    },
-    subrank: {
-        type: Sequelize.INTEGER,
-        allowNull: true
     }
 });
 
