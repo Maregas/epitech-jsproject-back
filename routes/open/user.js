@@ -7,11 +7,15 @@ router.post('/api/signup', async (req, res) => {
     const u = new User(body.email, body.password, body.nickname);
     if (body.password && body.email && body.nickname) {
         await u.hashpass(body.password);
-        const user = await u.create(process.env.SUPER_SECRET);
-        if (user.created) {
-            res.json(user);
-        } else {
-            res.status(400).json(user);
+        try {
+            const user = await u.create(process.env.SUPER_SECRET);
+            if (user.success) {
+                res.json(user);
+            } else {
+                res.status(400).json(user);
+            }
+        } catch (error) {
+            res.status(400).json(error);
         }
     } else {
         res.status(400).json({
@@ -27,7 +31,7 @@ router.post('/api/login', async (req, res) => {
     const u = new User(body.email, body.password);
     try {
         const user = await u.auth(process.env.SUPER_SECRET);
-        if (user.auth) {
+        if (user.success) {
             res.json(user);
         } else {
             res.status(400).json(user);
