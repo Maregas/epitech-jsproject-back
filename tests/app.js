@@ -11,5 +11,5 @@ app.get('/chat', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log('Up on 3301')
+    console.log('Up on 3301');
 });
