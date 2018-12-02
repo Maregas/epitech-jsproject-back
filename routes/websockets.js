@@ -9,7 +9,7 @@ chatroom.on('connection', socket => {
     logger.info(`user ${data.username} join ${data.room}`);
     socket.join(data.room);
     socket.emit('connectionMessage', {username: "Server", msg: `Welcome on the ${data.room} room.`});
-    chatroom.in(data.room).emit('connectionMessage', {username: "Server", msg: `user ${data.username} join ${data.room}`}):
+    chatroom.in(data.room).emit('connectionMessage', {username: "Server", msg: `user ${data.username} join ${data.room}`});
   });
 
   socket.on('chat message', data => {
