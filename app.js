@@ -1,10 +1,9 @@
 require("dotenv").config();
 const app = require("./controllers/server").app;
 const morgan = require("morgan");
-// const logger = require("./controllers/logger");
-// const ws = require("./routes/websockets");
 const bodyParser = require("body-parser");
 const jwt = require('jsonwebtoken');
+const ws = require("./routes/websockets"); // eslint-disable-line
 const mUser = require('./models/modelLoader').mUser;
 const cors = require('cors');
 

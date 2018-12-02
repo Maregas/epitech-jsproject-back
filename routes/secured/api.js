@@ -3,6 +3,7 @@ const router = express.Router();
 
 router.use(require('./user'));
 router.use(require('./game'));
+router.use(require('./chat'));
 //router.use(require('./admin'));
 
 
