@@ -1,5 +1,6 @@
 const mGame = require('../models/Game');
 const mRank = require('../models/Rank');
+const logger = require('./logger');
 
 class Game {
   constructor() {}
@@ -41,7 +42,8 @@ class Game {
       });
       return list.rows;
     } catch (error) {
-      return error;
+      logger.error(error);
+      return [];
     }
   }
 
@@ -73,6 +75,7 @@ class Game {
           }
         }
       } catch (error) {
+        console.log(error);
         res = {
           success: false,
           error: error.type,

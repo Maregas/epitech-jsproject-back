@@ -69,6 +69,4 @@ typings/
 # .env
 .env
 
-# db
-db/
 package-lock\.json
