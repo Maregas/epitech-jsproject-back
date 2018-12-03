@@ -37,7 +37,7 @@ class Game {
         ],
         include: [{
           model: mRank,
-          attributes: ['id', 'name', 'icon_url', 'position', 'subrank'],
+          attributes: ['id', 'name', 'icon_url', 'position'],
         }],
       });
       return list.rows;
